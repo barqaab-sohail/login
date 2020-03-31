@@ -45,12 +45,6 @@ class LoginController extends Controller
     }
 
 
-    // //Override from original (take from AuthenticatesUsers)
-    // protected function authenticated(Request $request, $user)
-    // {
-    //     $user->last_seen_at = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
-    //     $user->save();
-    // }
 
     public function login(Request $request)
     {
@@ -104,6 +98,7 @@ class LoginController extends Controller
  * @param \App\User $user
  * @return boolean
  */
+// //Override from original (take from AuthenticatesUsers)
 protected function sendLoginResponse(Request $request)
 {
 
@@ -118,8 +113,13 @@ protected function sendLoginResponse(Request $request)
     Auth::user()->save();
     $this->clearLoginAttempts($request);
 
-    return $this->authenticated($request, $this->guard()->user())
-        ?: redirect()->intended($this->redirectPath());
+    if ($response = $this->authenticated($request, $this->guard()->user())) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+                    ? new Response('', 204)
+                    : redirect()->intended($this->redirectPath());
 }
 
 

@@ -19,18 +19,18 @@ class SessionTimeOut
     public function handle($request, Closure $next)
     {
 
-        // if (auth()->user()){
+        if (auth()->user()){
            
-        //     $lastActivityTime =  DB::table('sessions')->where('user_id', auth()->user()->id)->pluck('last_activity')->first();
+            $lastActivityTime =  DB::table('sessions')->where('user_id', auth()->user()->id)->pluck('last_activity')->first();
            
-        //     if ((time()-$lastActivityTime) >= (1*60)){
-        //         //auth()->user()->logout;
-        //         return redirect('/login');
+            if ((time()-$lastActivityTime) >= (config('session.lifetime'))){
+                //auth()->user()->logout;
+                //return redirect('/login');
               
-        //         // Auth::logout();
-        //         // return redirect('/login');
-        //     }
-        // }
+                Auth::logout();
+                return redirect('/login');
+            }
+        }
 
        return $next($request);
     }
