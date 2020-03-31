@@ -48,6 +48,7 @@ class MailNotification extends Notification
                     ->from('noreply@barqaab.com', 'HRMS Admin')
                     ->line('Your registration code is '. $this->otp)
                     ->action('Notification Action', url('/'))
+                    ->line('If you did not request for registration, no further action is required.')
                     ->line('Thank you for using HRMS');
     }
 

@@ -31,12 +31,8 @@
 <!--c3 JavaScript -->
 <script src="{{asset('Massets/plugins/d3/d3.min.js') }}"></script>
 <script src="{{asset('Massets/plugins/c3-master/c3.min.js') }}"></script>
-<!-- Chart JS 
-<script src="{{asset('Massets/js/dashboard1.js') }}"></script>
-<script src="{{asset('Massets/js/dashboard1.js') }}"></script>
--->
+
 <!--CDN ChartJS 
- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
  -->
  <script src="http://www.chartjs.org/dist/2.7.3/Chart.bundle.js"></script>
   <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
@@ -367,18 +363,3 @@ function isValidEmailAddress(emailAddress) {
 
 
 </script>
- <!--
-<script src="{{asset('js/validation.js')}}"></script>
-
-<script>
-    ! function(window, document, $) {
-        "use strict";
-        $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(),
-            $(".skin-square input").iCheck({
-                checkboxClass: "icheckbox_square-green",
-                radioClass: "iradio_square-green"
-            }),
-            $(".touchspin").TouchSpin(), $(".switchBootstrap").bootstrapSwitch();
-    }(window, document, jQuery);
-</script>
--->

@@ -4,16 +4,21 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\Auth\StoreOTP;
+use App\User;
 use App\employee;
 use App\Notifications\MailNotification;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
-use App\Providers\RouteServiceProvider;
-use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+
+use App\Providers\RouteServiceProvider;
+
+
+
+
 
 class RegisterController extends Controller
 {
@@ -56,7 +61,6 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'cnic' => ['required','min:15','max:15'],
             'email' => ['required', 'string', 'email', 'max:255', ],
             //'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -79,7 +83,11 @@ class RegisterController extends Controller
        
         if ($user->code == $request->otp){
          
-            $user->update(['user_status' => 1, 'email_verified_at' =>  \Carbon\Carbon::now(),'password' => Hash::make($request->password) ]); 
+
+            DB::table('users')
+                ->where('email', $request->email)
+                ->update(['user_status' => 1, 'email_verified_at' =>  \Carbon\Carbon::now(),'password' => Hash::make($request->password) ]); 
+
         return redirect()->route('login')->with('success', 'You are sucessfully registered')->with(['email'=>$request->email]);
 
         }else{
@@ -94,12 +102,11 @@ class RegisterController extends Controller
        $this->validator($request->all())->validate();
            
          $test = DB::table('users')
-                    ->join('employees','employees.id','=','users.employee_id')
-                    ->where('email', $request->email)->where('cnic',$request->cnic)->first();
+                    ->where('email', $request->email)->first();
         
         if ($test == null)
         {
-            return view('auth.register')->withErrors("Your CNIC and Email is not matched. Please Contact to HR");
+            return view('auth.register')->withErrors("This Email Address is not Found. Please Contact to HR");
 
         }
         else

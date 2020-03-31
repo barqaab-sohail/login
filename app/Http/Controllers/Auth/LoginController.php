@@ -40,8 +40,17 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        
         //$this->middleware('guest')->except('logout');
     }
+
+
+    // //Override from original (take from AuthenticatesUsers)
+    // protected function authenticated(Request $request, $user)
+    // {
+    //     $user->last_seen_at = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
+    //     $user->save();
+    // }
 
     public function login(Request $request)
     {

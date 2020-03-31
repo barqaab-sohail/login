@@ -17,5 +17,14 @@ Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
 
+Route::get('/testing', function () {
+    return view('dashboard.dashboard1');
+});
+
+
 Auth::routes();
+Route::get('/code','Auth\RegisterController@create')->name('otp.create');
+Route::Post('/code','Auth\RegisterController@confirm')->name('otp.confirm');
+
+
 Route::get('/home', 'HomeController@index')->name('home');

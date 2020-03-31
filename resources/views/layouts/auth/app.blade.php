@@ -7,6 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('Massets/images/favicon.ico') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -79,3 +80,51 @@
     </div>
 </body>
 </html>
+<script src="{{asset('Massets/plugins/jquery/jquery.min.js') }}"></script>
+<script>
+ $('.fa-spinner').hide();
+$(document).ready(function(){
+    
+    (function(){
+        $('.form-prevent-multiple-submits').on('submit', function(){
+            $('.fa-spinner').show();
+            $('.btn-prevent-multiple-submits').attr('disabled','ture');
+           
+        })
+    })();
+
+      
+     //Make sure that the event fires on input change
+    $("#cnic").on('input', function(ev){
+        
+        //Prevent default
+        ev.preventDefault();
+        
+        //Remove hyphens
+        let input = ev.target.value.split("-").join("");
+        
+        //Make a new string with the hyphens
+        // Note that we make it into an array, and then join it at the end
+        // This is so that we can use .map() 
+        input = input.split('').map(function(cur, index){
+            
+            //If the size of input is 6 or 8, insert dash before it
+            //else, just insert input
+            if(index == 5 || index == 12)
+                return "-" + cur;
+            else
+                return cur;
+        }).join('');
+        
+        //Return the new string
+        $(this).val(input);
+    });
+
+
+
+    });
+   
+   
+    
+</script>
+

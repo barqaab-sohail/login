@@ -16,10 +16,10 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('email')->unique();
+             $table->smallInteger('code')->unsigned()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->default(bcrypt('Great@786'));
             $table->integer('user_status')->default(0)->comment('0 Not Registered, 1 Registered, 2 Blocked');
-            
             $table->string('session_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
