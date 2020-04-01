@@ -25,12 +25,12 @@
 			-->
 			
 			<h2 >Welcome to HRMS</h2>
-			<h1>@php
-			echo 'Dashboard-1';
-			@endphp
-				
-
-			</h1>
+			@can('View Record')
+				<h1>@php
+				echo 'Dashboard-1';
+				@endphp
+				</h1>
+			@endcan
 			
 		</div>
 	</div>

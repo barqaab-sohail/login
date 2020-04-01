@@ -26,7 +26,7 @@
 			
 			<h2 >Welcome to HRMS</h2>
 			<h1>@php
-			
+			echo auth()->user()->email;
 			@endphp
 				
 

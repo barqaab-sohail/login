@@ -103,16 +103,17 @@ protected function sendLoginResponse(Request $request)
 {
 
     $request->session()->regenerate();
-
+    
+    //It is overrried function
     $previous_session = Auth::User()->session_id;
-   
     if ($previous_session) {
         Session::getHandler()->destroy($previous_session);
     }
     Auth::user()->session_id = Session::getId();
     Auth::user()->save();
-    $this->clearLoginAttempts($request);
+    // end overridd function
 
+    $this->clearLoginAttempts($request);
     if ($response = $this->authenticated($request, $this->guard()->user())) {
             return $response;
         }
