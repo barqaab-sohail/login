@@ -1,5 +1,5 @@
 <header class="topbar">
-    <nav class="navbar top-navbar navbar-expand-md navbar-light">
+    <nav class="navbar top-navbar navbar-expand-md navbar-light" style="background-color:#00FF7F">
         <!-- ============================================================== -->
         <!-- Logo -->
         <!-- ============================================================== -->
@@ -7,12 +7,12 @@
             <a class="navbar-brand" href="#">
                 <!-- Logo icon --><b>
                    
-                    <img src="{{asset('Massets/images/bqb-white-logo-1.png') }}" alt="HRMS" class="light-logo" style="height:50px" />
+                    <img src="{{asset('Massets/images/bqb-black-logo-1.png') }}" alt="HRMS" class="light-logo" style="height:55px" />
                 </b>
                 <!--End Logo icon -->
                 <!-- Logo text -->
                 <span>
-                    <h3 class="light-logo"> <img src="{{asset('Massets/images/bqb-white-logo-2.png')}}"/></h3>
+                    <h3 class="light-logo"> <img src="{{asset('Massets/images/bqb-white-logo-3.png')}}"/></h3>
                 </span> 
             </a>
         </div>
@@ -55,7 +55,8 @@
                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   
                     
-                    <img src="{{asset(isset(Auth::User()->employee->picture->name)? 'storage/pictures/'.Auth::User()->employee->picture->name: 'Massets/images/default.png') }}" onerror="this.src ='{{asset('Massets/images/default.png')}}';" alt="user" class="profile-pic" height="30" width="50%"/></a>
+                    {{ucwords (Auth::User()->HrEmployee->first_name??'')}} {{ucwords(Auth::User()->HrEmployee->last_name??'')}} 
+                    <img src="{{hrmsAsset().auth()->user()->picturePath()}}" onerror="this.src ='{{asset('Massets/images/default.png')}}';" alt="user" class="profile-pic" height="40" width="50%"/></a>
                     
                     <div class="dropdown-menu dropdown-menu-right scale-up">
                         <ul class="dropdown-user">

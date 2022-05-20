@@ -25,42 +25,13 @@
 			-->
 			
 			<h2 >Welcome to HRMS</h2>
-			@can('View Record')
-				<h1>@php
-				echo 'Dashboard-1';
-				@endphp
-				</h1>
-			@endcan
+			<h1>@php
+			echo auth()->user()->email;
+			@endphp
+			</h1>
 			
 		</div>
 	</div>
-	
-
-	<!--TASK -->
-		<div class="card">
-			<div class="card-body">
-			
-	        
-		          	<!-- Button trigger modal -->
-
-		          	<button type="button" class="btn btn-info float-right"  data-toggle="modal" data-target="#taskModal"> 
-		            Add New Task
-		          	</button>
-		          
-		          	<!-- Modeal Include-->
-		          
-	  			
-	  				<div id="append_data" class="table-responsive m-t-40">
-	      		</div>
-				
-				
-
-	
-			</div>	
-	
-		</div>
-	<!--End TASK -->
-
 	
 
 

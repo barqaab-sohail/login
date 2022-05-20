@@ -31,7 +31,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = 'pms/dashboard';
 
     /**
      * Create a new controller instance.
@@ -85,43 +85,52 @@ class LoginController extends Controller
         return $this->sendFailedLoginResponse($request);
     }
 
-     public function logout(){
+    public function logout(){
 
         Auth::logout();
         return redirect()->route('login');
         //return view ('auth.login');
     }
 
-    /**
- * Swap a user session with a current one
- * 
- * @param \App\User $user
- * @return boolean
- */
-// //Override from original (take from AuthenticatesUsers)
-protected function sendLoginResponse(Request $request)
-{
+        /**
+     * Swap a user session with a current one
+     * 
+     * @param \App\User $user
+     * @return boolean
+     */
+    // //Override from original (take from AuthenticatesUsers)
+    protected function sendLoginResponse(Request $request)
+    {
 
-    $request->session()->regenerate();
-    
-    //It is overrried function
-    $previous_session = Auth::User()->session_id;
-    if ($previous_session) {
-        Session::getHandler()->destroy($previous_session);
-    }
-    Auth::user()->session_id = Session::getId();
-    Auth::user()->save();
-    // end overridd function
-
-    $this->clearLoginAttempts($request);
-    if ($response = $this->authenticated($request, $this->guard()->user())) {
-            return $response;
+        $request->session()->regenerate();
+        
+        //It is overrried function
+        $previous_session = Auth::User()->session_id;
+        if ($previous_session) {
+            Session::getHandler()->destroy($previous_session);
         }
+        Auth::user()->session_id = Session::getId();
+        Auth::user()->save();
+        // end overridd function
 
-        return $request->wantsJson()
-                    ? new Response('', 204)
-                    : redirect()->intended($this->redirectPath());
-}
+        $this->clearLoginAttempts($request);
+        if ($response = $this->authenticated($request, $this->guard()->user())) {
+                return $response;
+            }
+
+            return $request->wantsJson()
+                        ? new Response('', 204)
+                        : redirect()->intended($this->redirectPath());
+    }
+
+    function authenticated(Request $request, $user)
+    {
+        $user->update([
+            'last_login_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'last_login_ip' => $request->getClientIp()
+        ]);
+
+    }
 
 
 

@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('Massets/images/favicon.ico') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'PMS') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -23,10 +23,10 @@
 </head>
 <body>
     <div id="app">
-       <nav class="navbar navbar-expand-md bg-primary navbar-dark navbar-laravel">
+       <nav class="navbar navbar-expand-md bg-success navbar-dark navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                   <img class="img-rounded" alt="" src="{{asset('Massets/images/mono.png')}}" width="40px"> {{ config('app.name', 'Laravel') }}
+                   <img class="img-rounded" alt="" src="{{asset('Massets/images/mono.png')}}" width="40px"> {{ config('app.name', 'PMS') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

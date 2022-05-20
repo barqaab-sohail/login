@@ -13,18 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('dashboard.dashboard');
-});
 
-Route::get('/testing', function () {
-    return view('dashboard.dashboard1');
-});
 
 
 Auth::routes();
 Route::get('/code','Auth\RegisterController@create')->name('otp.create');
 Route::Post('/code','Auth\RegisterController@confirm')->name('otp.confirm');
 
+//PMS Routes
+Route::group(['prefix' => 'pms', 'middleware' => ['auth'], 'namespace'=>'pms'], function(){
 
-Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('/dashboard', function () {
+    return view('pms.dashboard.dashboard');
+	});
+
+});

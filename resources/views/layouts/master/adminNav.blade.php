@@ -14,7 +14,7 @@
             <ul id="sidebarnav">
                 {{--/////Second Start--}}
                 
-                 <li @if(request()->is('dashboard')) class="active" @endif><a id="notInclude" class="waves-effect waves-dark" href="{{url('/dashboard')}}" aria-expanded="false"><i class="fas fa-tachometer-alt"></i><span class="hide-menu">Dashboard </span></a>
+                 <li @if(request()->is('pms/dashboard')) class="active" @endif><a id="notInclude" class="waves-effect waves-dark" href="{{url('pms/dashboard')}}" aria-expanded="false"><i class="fas fa-tachometer-alt"></i><span class="hide-menu">Dashboard </span></a>
                 </li>
                
 
